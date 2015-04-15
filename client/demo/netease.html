@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui, user-scalable=no">
+        <meta name="renderer" content="webkit">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        
+        <meta name="format-detection" content="telphone=no, email=no" />
+        
+        <meta name="HandheldFriendly" content="true">
+        <meta name="MobileOptimized" content="320">
+        <meta name="browsermode" content="application">
+        <meta name="x5-page-mode" content="app">
+        
+        <meta name="msapplication-tap-highlight" content="no">
+        
+        <meta name="description" content="测试">
+        <meta name='yixin-share-desc' content='测试内容'>
+        <meta name='yixin-share-image' content='http://img6.cache.netease.com/cnews/2015/1/28/201501281838569299d.png'>
+        <meta name="keywords" content="测试">
+        <title>小张裸奔记_2015全国两会系列策划</title>
+        <link rel="stylesheet" href="main.css">
+        <script type="text/meta" id="wapper_name">2015两会策划之小张裸奔记</script>
+        
+    </head>
+    <body>
+<script src="js/h5.zepto.js"></script>
+<script type="text/javascript">
+    (function(undefined){
+        var that = this;
+        //get info from localStorage if preview
+        try{
+            that['erquan-preview-config'] = JSON.parse(localStorage.getItem('erquan-preview-config'));
+        }catch(e){
+            //window.localStorage is null when this page be visited by File Protocol in IE 
+        }
+        
+        //rewrite title
+        var nameRaw = document.querySelector('#wapper_name');
+        if(nameRaw){
+            document.title = nameRaw.innerHTML;
+        }
+    }).call(this);
+</script>       
+        
+<script type="text/javascript" src="js/require-2.1.9.js"></script>
+<!-- share module start -->
+<script src="js/h5.share.js"></script>
+<script>
+    define("erquan_common_share", ["require", "exports", "module", "erquan"], function(require, exports, module){
+        var Viewport = require("DOMNode/Viewport");
+        if(!window.h5Share){
+            return;
+        }
+        h5Share.init({
+            title: '小张裸奔记_2015全国两会系列策划',
+            desc: '个人信息泄露不是新话题，每一天都有信息泄露事件发生。我们始终无法保全自己，穿着皇帝的新衣游走在这大数据的时代。',
+            url: 'http://news.163.com/special/2015lh_luobenji/',
+            img: 'http://img6.cache.netease.com/cnews/2015/1/28/201501281838569299d.png'
+        });
+        Viewport.prototype.share = function(){
+            h5Share.share();
+        };
+    });
+    require(["erquan_common_share"]);
+    require.config({
+        paths: {
+            'erquan': 'js/boot',
+            'boot': 'js/boot'
+        }
+    });
+
+    var configObj = null;
+    $.getJSON('data/demo.json', function (data) {
+        configObj = data;
+        if (!configObj.node) {
+            return;
+        }
+
+        window['erquan-preview-config'] = configObj;
+        require(['boot']);
+        
+    });
+    
+</script>    
+<!-- share module end -->
+
+    </body>
+</html>
