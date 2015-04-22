@@ -1,0 +1,117 @@
+{
+    "status": 0,
+    "error_msg": "Success",
+    "data": {
+        "id": 1,
+        "author": "virola",
+        "version": 30,
+        "template": {
+            "title": "sugar",
+            "content": "这是要分享的一段话",
+            "sharepic": "http://qing.94uv.cn/mwgx/asset/img/desserts/makalong.jpg",
+            "global": {
+                "backHome": {
+                    "pic": "",
+                    "url": "",
+                    "show": true
+                },
+                "music": {
+                    "show": true,
+                    "loop": true,
+                    "autoplay": false,
+                    "url": "http://qing.94uv.cn/hnqs/images/music.mp3"
+                },
+                "playControl": true
+            },
+            "hashnav": true,
+            "loop": false,
+            "slides": [
+                {
+                    "effect": "toup",
+                    "bg": {
+                        "bgcolor": " rgba(255,255,255,1)",
+                        "pic": "http://7sbsoj.com2.z0.glb.qiniucdn.com/maka/app/gfile/public/pic%3fget=id/NNR4S64RKXMT65XF7M3HFY/thumb/100",
+                        "picheight": "auto",
+                        "picwidth": "670",
+                        "pictop": "0",
+                        "picleft": "0"
+                    },
+                    "content": [
+                        {
+                            "type": "text",
+                            "rotate": "0",
+                            "bgcolor": "rgba(25,25,25,0)",
+                            "text": "测试文本",
+                            "show": "zoomInDown",
+                            "speed": 1300,
+                            "delay": 900,
+                            "style": {
+                                "top": 397,
+                                "left": 12,
+                                "width": 624,
+                                "height": "100",
+                                "opacity": 1,
+                                "border-radius": 0,
+                                "box-shadow": 0,
+                                "border-style": "none",
+                                "border-color": "black",
+                                "border-width": "0px",
+                                "line-height": 1.5,
+                                "text-align": "center",
+                                "vertical-align": "middle",
+                                "color": "#980000",
+                                "font-size": "40px",
+                                "font-weight": "normal",
+                                "font-style": "normal"
+                            }
+                        }
+                    ]
+
+                },
+                {
+                    "effect": "toup",
+                    "bg": {
+                        
+                        "bgcolor": "#39c",
+                        "pic": "",
+                        "picheight": "auto",
+                        "picwidth": "670",
+                        "pictop": "0",
+                        "picleft": "0"
+                    },
+                    "content": [
+                    ]
+
+                },
+                {
+                    "effect": "flipup",
+                    "bg": {
+                        "bgcolor": "#39c",
+                        "pic": "",
+                        "picheight": "auto",
+                        "picwidth": "670",
+                        "pictop": "0",
+                        "picleft": "0"
+                    },
+                    "content": [
+                    ]
+
+                },
+                {
+                    "bg": {
+                        "effect": "toup",
+                        "bgcolor": "#39c",
+                        "pic": "",
+                        "picheight": "auto",
+                        "picwidth": "670",
+                        "pictop": "0",
+                        "picleft": "0"
+                    },
+                    "content": [
+                    ]
+
+                }
+            ]
+        }
+    }
+}
