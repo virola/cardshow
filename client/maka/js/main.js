@@ -49,7 +49,6 @@ function hideSP() {
         y: "100%"
     }).fadeOut()
 }
-// $(window).width() > $(window).height() && (location.href = "../mobile/pcviewer.php?id=" + _pid_);
 var viewer_isvip = !1,
     thum, versiondata;
 $.ajax({
@@ -71,4 +70,41 @@ $.ajax({
         console.log("report suc")
     },
     error: function() {}
+});
+
+var DEFAULT_WIDTH = 640;
+var DEFAULT_HEIGHT = 1012;
+/**
+ * 返回是否是PC页面
+ * 
+ * @return {boolean} true / false
+ */
+function checkIsPC() {
+    var system = {
+        win: false,
+        mac: false,
+        xll: false
+    };
+    var p = navigator.platform;
+    system.win = p.indexOf('Win') == 0;
+    system.mac = p.indexOf('Mac') == 0;
+    system.x11 = (p == 'X11') || (p.indexOf('Linux') == 0);
+    var winWidth = $(window).width();
+    if ((winWidth > DEFAULT_WIDTH && window.devicePixelRatio < 2) && (system.win || system.mac || system.xll)) {
+        return true;
+    } 
+    else {
+        return false;
+    }
+}
+$(function () {
+    var app = {
+        width: $(window).width(),
+        height: $(window).height()
+    };
+    if (checkIsPC()) {
+        app.width = DEFAULT_WIDTH;
+        app.height = DEFAULT_HEIGHT;
+    }
+    $('#sugar').width(app.width).height(app.height);
 });

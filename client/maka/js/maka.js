@@ -48,7 +48,7 @@ function makapreloader() {
 function makapageeffetc() {}
 
 function makacard(a, b, c) {
-    this.data = a, this.containner = b, this.current = 0, c && (this.music = c, this.musicsrc = "http://m.maka.mobi/maka/app/gfile/public/music/getcdn?get=id/" + c.id), this.lastcallback = function() {}, this.firstcallback = function() {}, this.init(a)
+    this.data = a, this.containner = b, this.current = 0, c && (this.music = c, this.musicsrc = c.src), this.lastcallback = function() {}, this.firstcallback = function() {}, this.init(a)
 }
 
 function makapage(a) {
@@ -66,7 +66,7 @@ function makaajax(a, b) {
 function getversion(a) {
     a.user_thum && $("#user_thum").attr({
         src: a.user_thum
-    }), a.author && $("#authorname").html(a.author), viewer_version_data = a, viewer_isvip = 0 == a.vip || "false" == a.vip || void 0 == a.vip || "free_user" == a.vip || "wemedia" == a.vip ? !1 : !0, viewer_isvip || $("#supad").hide().html("使用MAKA.im创作").fadeIn(), viewer_version = a.p_version, editor_makaproject.jsonp(function() {})
+    }), a.author && $("#authorname").html(a.author), viewer_version_data = a, viewer_isvip = 0 == a.vip || "false" == a.vip || void 0 == a.vip || "free_user" == a.vip || "wemedia" == a.vip ? !1 : !0, viewer_isvip || $("#supad").hide().html("使用sugar创作").fadeIn(), viewer_version = a.p_version, editor_makaproject.jsonp(function() {})
 }
 
 function getjsonsuccess(a) {
@@ -86,7 +86,7 @@ function getjsonsuccess(a) {
         desc: d,
         link: versiondata.wx.link,
         imgUrl: c
-    }), $("#cover").attr("src", b), editor_makacard = a.data.music ? new makacard(a.data.pdata, $("#makadym"), a.data.music) : new makacard(a.data.pdata, $("#makadym"), null), editor_makacard.start(0), editor_makacard.fitscreen(1);
+    }), $("#cover").attr("src", b), editor_makacard = a.data.music ? new makacard(a.data.pdata, $("#sugar-wrap"), a.data.music) : new makacard(a.data.pdata, $("#sugar-wrap"), null), editor_makacard.start(0), editor_makacard.fitscreen(1);
     var e = new Image;
     e.src = b, viewer_preloader.loadstart();
     var f = ($(window).height(), new Audio);
@@ -141,7 +141,7 @@ makapreloader.prototype.chooseroad = function() {
 }, makapreloader.prototype.addpic = function(a, b, c) {
     if (void 0 != b) {
         var d = new Object;
-        d.tar = a, d.src = b, d.page = c, console.log("addpic" + b + "page" + c), this.queue.push(d), 0 == c && this.endnum++
+        d.tar = a, d.src = b, d.page = c, this.queue.push(d), 0 == c && this.endnum++
     }
 }, makapreloader.prototype.loadstart = function() {
     $(".wthum").hide(), $("#covert").show(), $("#cover").fadeIn();
@@ -169,10 +169,12 @@ makapreloader.prototype.chooseroad = function() {
         if (!this.queue[a].src || 0 == this.queue[a].src) return void b.loadone(a + 1);
         a == this.endnum || a == this.queue.length && a < this.endnum;
         var c = new Image;
-        this.queue[a].src.replace("http://resource.maka.im/get?img=id/", "http://img.maka.mobi/maka/app/gfile/public/index.php/picture/get?get=id/"), c.src = this.queue[a].src, console.log("loadingstart+" + this.usecdn + c.src), c.complete ? (b.loadone(a + 1), b.queue[a].tar.attr("src", b.queue[a].src), console.log("load com" + a + "/" + b.queue.length + " 2src" + b.queue[a].src)) : (c.onload = function() {
-            b.loadone(a + 1), b.queue[a].tar.attr("src", b.queue[a].src), console.log("load onload" + a + "/" + b.queue.length + " 2src" + b.queue[a].src)
+        this.queue[a].src.replace("http://resource.maka.im/get?img=id/", "http://img.maka.mobi/maka/app/gfile/public/index.php/picture/get?get=id/"), c.src = this.queue[a].src, 
+        c.complete ? (b.loadone(a + 1), b.queue[a].tar.attr("src", b.queue[a].src), 
+            console.log("load com:" + a + "/" + b.queue.length + " |src:" + b.queue[a].src)) : (c.onload = function() {
+            b.loadone(a + 1), b.queue[a].tar.attr("src", b.queue[a].src)
         }, c.onerror = function() {
-            console.log("load error" + a + "/" + b.queue.length + " 2src" + b.queue[a].src), b.loadone(a + 1)
+            console.log("load error:" + a + "/" + b.queue.length + " |src:" + b.queue[a].src), b.loadone(a + 1)
         })
     }
 }, makapreloader.prototype.loadend = function() {
@@ -260,7 +262,8 @@ makacard.prototype.initswipeaction = function() {
     }).on("swipedown", function() {
         pagelock && (pagelock = !1, setTimeout(function() {
             pagelock = !0
-        }, 200), console.log("swipedown" + a.current), a.prevpage())
+        }, 200), 
+        a.prevpage())
     })
 }, makacard.prototype.start = function(a) {
     if (this.pages[a] && (this.pages[a].page.show(), this.pages[a].showeffect(), this.current = a, 0 == editor_editingmode))
@@ -279,7 +282,7 @@ makacard.prototype.initswipeaction = function() {
             y: "0%"
         })
     })));
-    this.current == this.pages.length - 2 && ($("#arrow").fadeOut(), 1 != viewer_isvip && $("#makaad").fadeIn()), console.log("cur" + this.current + " nex" + (this.current + 1));
+    this.current == this.pages.length - 2 && ($("#arrow").fadeOut(), 1 != viewer_isvip && $("#makaad").fadeIn());
     var a = this.pages[this.current].page,
         b = this.pages[this.current + 1].page,
         c = a.attr("effect"),
@@ -287,7 +290,7 @@ makacard.prototype.initswipeaction = function() {
         e = effects[c][0];
     b.show().removeClass(), a.removeClass(), a.addClass("page " + e).fadeOut(), $(".pageactive").fadeOut(), $(".pageactive").removeClass("pageactive"), b.addClass("page active " + d).show().addClass("pageactive"), this.pages[this.current + 1].showelement(), this.current++
 }, makacard.prototype.prevpage = function() {
-    if (console.log("prev" + this.current), 0 != this.current) {
+    if (0 != this.current) {
         $("#arrow").fadeIn(), $("#makaad").fadeOut();
         var a = this.pages[this.current].page,
             b = this.pages[this.current - 1].page,
@@ -302,9 +305,10 @@ makacard.prototype.initswipeaction = function() {
             opacity: 1
         }).show().addClass("pageactive"), this.pages[this.current - 1].showelement(), this.current--, b.show()
     }
-}, makacard.prototype.topage = function(a) {}, makacard.prototype.fitscreen = function(a) {
-    var b = a * $(window).width() / 640,
-        c = a * $(window).height() / 1010;
+}, makacard.prototype.topage = function(a) {}, 
+makacard.prototype.fitscreen = function(a) {
+    var b = a * $(window).width() / DEFAULT_WIDTH,
+        c = a * $(window).height() / DEFAULT_HEIGHT;
     this.sc = b > c ? b : c, this.scale = a, pwidth = 640 * this.sc, pheight = 1012 * this.sc;
     $(window).width() / 2 - .5 * pwidth, $(window).height() / 2 - .5 * pheight;
     $("#sppageframe").css({
@@ -323,7 +327,13 @@ makapage.prototype.init = function(a) {
             var c = /id\/\d{1,6}/,
                 d = b.bgpic;
             if (d.match(c)) var e = d.match(c)[0].substr(3);
-            this.bgpic = e ? b.bgpic.replace("http://resource.maka.im/get?img=id/", "http://7sbsoj.com2.z0.glb.qiniucdn.com/maka/app/gfile/public/pic%3Fget=id/") : b.bgpic.replace("http://resource.maka.im/get?img=id/", "http://img.maka.mobi/maka/app/gfile/public/index.php/picture/get?get=id/"), console.log("this" + this.bgpic)
+            this.bgpic = e ? b.bgpic.replace(
+                "http://resource.maka.im/get?img=id/", 
+                "http://7sbsoj.com2.z0.glb.qiniucdn.com/maka/app/gfile/public/pic%3Fget=id/"
+            ) : b.bgpic.replace(
+                "http://resource.maka.im/get?img=id/", 
+                "http://img.maka.mobi/maka/app/gfile/public/index.php/picture/get?get=id/"
+            )
         }
     } else this.bgpic = b.bgpic ? b.bgpic : null; if (this.bgpictop = b.bgpictop ? b.bgpictop : 0, this.bgpicleft = b.bgpicleft ? b.bgpicleft : 0, this.bgpicheight = b.bgpicheight ? b.bgpicheight : 0, this.bgpicwidth = b.bgpicwidth && "null" != b.bgpicwidth ? b.bgpicwidth : "auto", this.bgcropx = b.bgcropx ? b.bgcropx : 0, this.bgcropy = b.bgcropy ? b.bgcropy : 0, this.bgcropw = b.bgcropw ? b.bgcropw : 0, this.bgcroph = b.bgcroph ? b.bgcroph : 0, this.content = b.content ? b.content : null, this.opacity = b.opacity ? b.opacity : 1, this.rotate = b.rotate ? b.rotate : 0, this.blur = b.blur ? b.blur : 0, this.page = $('<div class="page"  effect="' + this.pageeffect + '"> </div>'), this.pagebg = $('<div class="pagebg" style="overflow:hidden;background:' + this.bgcolor + '"></div>'), this.picscale = b.bgscale ? b.bgscale : 1, this.bgpic) {
         this.pagebgimg = $('<img src="' + this.bgpic + '" style="position:absolute;top:' + this.bgpictop + "px;left:" + (parseInt(this.bgpicleft) - 1) + "px;width:" + (parseInt(this.bgpicwidth) + 2) + 'px; " />'), this.pagebgimg.css({
@@ -333,7 +343,7 @@ makapage.prototype.init = function(a) {
         if (1 != this.picscale) {
             var g = new Image;
             g.src = b.bgpic, g.complete ? $("#console").append("<br>ratiopp" + parseInt(f.bgpictop - f.picscale * g.naturalHeight / 2 * (640 / g.naturalWidth) + g.naturalHeight / 2 * (640 / g.naturalWidth)) + "px") : g.onload = function() {
-                $("#console").append("<br>ratio" + parseInt(f.bgpictop - f.picscale * g.naturalHeight / 2 * (640 / g.naturalWidth) + g.naturalHeight / 2 * (640 / g.naturalWidth)) + "px"), console.log("ratio" + g.naturalWidth), f.pagebgimg.css({
+                $("#console").append("<br>ratio" + parseInt(f.bgpictop - f.picscale * g.naturalHeight / 2 * (640 / g.naturalWidth) + g.naturalHeight / 2 * (640 / g.naturalWidth)) + "px"), f.pagebgimg.css({
                     top: parseInt(f.bgpictop - f.picscale * g.naturalHeight / 2 * (640 / g.naturalWidth) + g.naturalHeight / 2 * (640 / g.naturalWidth)) + "px"
                 }), f.pagebgimg.css({
                     left: parseInt(f.bgpicleft - f.picscale * g.naturalWidth / 2 * (640 / g.naturalWidth) + g.naturalWidth / 2 * (640 / g.naturalWidth)) + "px"
@@ -341,7 +351,7 @@ makapage.prototype.init = function(a) {
                     width: f.picscale * (parseInt(f.bgpicwidth) + 2)
                 }), f.pagebgimg.css({
                     scale: 1
-                }), console.log("bgpic" + f.bgpictop - f.picscale * g.naturalHeight + g.naturalHeight + "px")
+                })
             }
         }
     } else this.pagebgimg = $('<img style="position:absolute;top:' + this.bgpictop + "px;left:" + this.bgpicleft + 'px;width:0px; " />');
@@ -351,7 +361,7 @@ makapage.prototype.init = function(a) {
         "-webkit-filter": "blur(" + this.blur + "px)"
     }), this.elearray = [], this.ismove = !0, this.pagebg.append(this.pagebgimg), this.pagecontent = $('<div class="pagecontent"></div>');
     for (var h in this.content)
-        if (console.log("eletype " + this.content[h].type), console.log("eleleft " + this.content[h].left), console.log("eletop " + this.content[h].top), console.log("elewidth " + this.content[h].w), console.log("eleheight " + this.content[h].h), !(this.content[h].left > 1200 || this.content[h].left < -1200 || this.content[h].top > 1200 || this.content[h].top < -1200))
+        if (!(this.content[h].left > 1200 || this.content[h].left < -1200 || this.content[h].top > 1200 || this.content[h].top < -1200))
             if ("pshape" == this.content[h].type) {
                 var i = new pshape(this.content[h], this);
                 this.elearray.push(i), this.pagecontent.append(i.get())
@@ -365,9 +375,8 @@ makapage.prototype.init = function(a) {
         var i = new k(this.content[h], this);
         this.elearray.push(i), this.pagecontent.append(i.get())
     } else if ("charts" == this.content[h].type) {
-        if (console.log(this.content[h]), !this.content[h].content) continue;
+        if (!this.content[h].content) continue;
         if ("pie" == this.content[h].content.type) {
-            console.log(this.content[h]);
             var i = new elechartpie(this.content[h], this);
             this.elearray.push(i), this.pagecontent.append(i.get())
         } else {
@@ -438,11 +447,16 @@ makapage.prototype["delete"] = function() {}, makapage.prototype.get = function(
         c.loadpic(a)
     }
 }, makapage.prototype.fitscreen = function(a) {
-    var b = a * $(window).width() / 636,
-        c = a * $(window).height() / 1004;
-    $(window).width() > $(window).height() ? (this.sc = c > b ? b : c, this.msc = c > b ? b : c) : (this.sc = b > c ? b : c, this.msc = c > b ? b : c), viewer_sc = this.msc, pwidth = 640 * this.sc, pheight = 1012 * this.sc;
-    var d = $(window).width() / 2 - .5 * pwidth,
-        e = $(window).height() / 2 - .5 * pheight;
+    var w = ($(window).width() > DEFAULT_WIDTH && window.devicePixelRatio < 2) ? DEFAULT_WIDTH : $(window).width();
+    var h = ($(window).height() > DEFAULT_HEIGHT && window.devicePixelRatio < 2) ? DEFAULT_HEIGHT : $(window).height();
+    var b = a * w / 636,
+        c = a * h / 1004;
+    w > h 
+    ? (this.sc = c > b ? b : c, this.msc = c > b ? b : c) 
+    : (this.sc = b > c ? b : c, this.msc = c > b ? b : c), 
+    viewer_sc = this.msc, pwidth = DEFAULT_WIDTH * this.sc, pheight = DEFAULT_HEIGHT * this.sc;
+    var d = w / 2 - .5 * pwidth,
+        e = h / 2 - .5 * pheight;
     editor_preview || (this.page.css({
         width: pwidth,
         height: pheight
@@ -462,7 +476,8 @@ makapage.prototype["delete"] = function() {}, makapage.prototype.get = function(
         scale: a
     }))
 }, makaelement.prototype.init = function(a) {
-    this.top = a.top, this.left = a.left, this.width = a.w, this.height = a.h, this.bgcolor = a.bgcolor, this.opacity = a.opacity, this.eletype = a.type, this.con = a.con, this.show = a.show, this.speed = a.speed, this.delay = a.delay, this.tl = a.tl ? a.tl : 0, this.picid = a.picid ? a.picid : 0, this.shape = a.shape ? a.shape : 0, this.loopeffect = a.loopeffect ? a.loopeffect : 0, this.shapeeffect = a.shapeeffect ? a.shapeeffect : "noeffect", this.frame = a.frame ? a.frame : 0, this.stylecolor = a.stylecolor ? a.stylecolor : "rgba(0,0,0,0)", this.styleopacity = a.styleopacity ? a.styleopacity : 0, console.log("init" + this.picid), this.borderradius = a.borderradius ? a.borderradius : 0, this.boxshadow = a.boxshadow ? a.boxshadow : -1, this.elementout = $('<div class="elementout " style="z-index:0;height:0;width:0px;position:relative;opacity:' + this.opacity + ";-webkit-transform:rotate(" + this.rotate + 'deg);"></div>');
+    this.top = a.top, this.left = a.left, this.width = a.w, this.height = a.h, this.bgcolor = a.bgcolor, this.opacity = a.opacity, this.eletype = a.type, this.con = a.con, this.show = a.show, this.speed = a.speed, this.delay = a.delay, this.tl = a.tl ? a.tl : 0, this.picid = a.picid ? a.picid : 0, this.shape = a.shape ? a.shape : 0, this.loopeffect = a.loopeffect ? a.loopeffect : 0, this.shapeeffect = a.shapeeffect ? a.shapeeffect : "noeffect", this.frame = a.frame ? a.frame : 0, this.stylecolor = a.stylecolor ? a.stylecolor : "rgba(0,0,0,0)", 
+    this.styleopacity = a.styleopacity ? a.styleopacity : 0, this.borderradius = a.borderradius ? a.borderradius : 0, this.boxshadow = a.boxshadow ? a.boxshadow : -1, this.elementout = $('<div class="elementout " style="z-index:0;height:0;width:0px;position:relative;opacity:' + this.opacity + ";-webkit-transform:rotate(" + this.rotate + 'deg);"></div>');
     var b = this.width > this.height ? this.width : this.height,
         c = this.borderradius / 100 * b;
     if (this.element = $('<div class="element" style="z-index:0;border-radius:' + c + "px;top:" + this.top + "px;left:" + this.left + "px;width:" + this.width + "px;height:" + this.height + "px;background:" + this.bgcolor + '" ></div>'), 0 != this.shape && this.shapearea.css({
@@ -470,7 +485,7 @@ makapage.prototype["delete"] = function() {}, makapage.prototype.get = function(
     }), this.borderstyle = a["border-style"] ? a["border-style"] : "none", this.bordercolor = a["border-color"] ? a["border-color"] : "black", this.borderwidth = a["border-width"] ? a["border-width"] : "0px", this.rotate = a.rotate ? a.rotate : 0, "pic" == this.eletype) {
         if (this.defaultw = a.defaultw ? a.defaultw : 0, this.defaulth = a.defaulth ? a.defaulth : 0, this.inw = a.inw, this.inh = "auto", this.intop = parseInt(a.intop), this.inleft = parseInt(a.inleft), 0 != this.picid && this.picid) {
             var d = 100;
-            this.inw < 100 ? d = 100 : 0 != this.defaultw && this.defaultw ? d = 100 * parseInt(this.inw / this.defaultw) : null == this.inw ? (this.inw = "auto", d = 100) : d = 100, d > 100 && (d = 100), 0 == d && (d = 100), console.log("def" + this.defaultw + " inw " + this.inw + "scale " + d), this.con = this.picid < 99999999 ? "http://7sbsoj.com2.z0.glb.qiniucdn.com/maka/app/gfile/public/pic%3Fget=id/" + this.picid + "/thumb/100" : "http://img.maka.mobi/maka/app/gfile/public/index.php/picture/get?get=id/" + this.picid + "/thumb/100"
+            this.inw < 100 ? d = 100 : 0 != this.defaultw && this.defaultw ? d = 100 * parseInt(this.inw / this.defaultw) : null == this.inw ? (this.inw = "auto", d = 100) : d = 100, d > 100 && (d = 100), 0 == d && (d = 100), this.con = this.picid < 99999999 ? "http://7sbsoj.com2.z0.glb.qiniucdn.com/maka/app/gfile/public/pic%3Fget=id/" + this.picid + "/thumb/100" : "http://img.maka.mobi/maka/app/gfile/public/index.php/picture/get?get=id/" + this.picid + "/thumb/100"
         } else this.lazy = this.data.con, this.con = this.data.con;
         this.contentarea = $('<img src="' + this.con + '" class="oldele"  style="position:absolute;width:' + this.inw + "px;top:" + this.intop + "px;left:" + this.inleft + 'px" />')
     } else("text" == this.eletype || "btn" == this.eletype) && ("btn" == this.eletype && (this.url = a.url ? a.url : ""), this.element.css({
@@ -498,7 +513,7 @@ makapage.prototype["delete"] = function() {}, makapage.prototype.get = function(
     var e = parseInt(this.height) / 2 + parseInt(this.top);
     this.elementout.css({
         "transform-origin": parseInt(this.left) + parseInt(this.width / 2) + "px " + e + "px"
-    }), console.log("ot" + e), this.timeout, this.sc = .7, this.update(), this.viewmodeinit(a)
+    }), this.timeout, this.sc = .7, this.update(), this.viewmodeinit(a)
 }, makaelement.prototype.viewmodeinit = function(a) {
     if (1 != editor_editingmode && "btn" == this.eletype) {
         this.url = a.url ? a.url : "www.sugar.im";
@@ -506,7 +521,7 @@ makapage.prototype["delete"] = function() {}, makapage.prototype.get = function(
         b.elementout.css({
             "z-index": 999
         }), b.element.on("click", function() {
-            "http://" != b.url.substr(0, 7) && (b.url = "http://" + b.url), console.log("jumpto" + b.url), window.location.href = b.url
+            "http://" != b.url.substr(0, 7) && (b.url = "http://" + b.url), window.location.href = b.url
         })
     }
 }, makaelement.prototype.clean = function() {
@@ -631,7 +646,6 @@ var editor_makaproject, editor_makacard, editor_makatoolbar, editor_editingmode 
 editor_makaproject = new makaajax(_pid_, "getjsonsuccess", "getversion");
 var viewer_version, view_thum;
 $(window).resize(function() {}), pshape.prototype.generate = function() {
-    console.log("url", this.eletype);
     var a = {
         top: this.top,
         left: this.left,
@@ -651,7 +665,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     };
     return a
 }, pshape.prototype.init = function(a) {
-    this.top = a.top, this.left = a.left, this.width = a.w, "null" == this.width && (this.width = 640), this.height = a.h, this.shapecolor = a.shapecolor, this.opacity = a.opacity ? a.opacity : 1, this.eletype = "pshape", this.show = a.show ? a.show : "fadeIn", this.speed = a.speed ? a.speed : 1, this.delay = a.delay ? a.delay : 1, this.tl = a.tl ? a.tl : 0, this.picid = a.picid ? a.picid : 0, this.shape = a.shape ? a.shape : 0, console.log("init" + this.picid), this.borderradius = a.borderradius ? a.borderradius : 0, this.boxshadow = a.boxshadow ? a.boxshadow : -1, this.elementout = $('<div class="elementout" style="z-index:0;height:0;width:0px;position:relative;opacity:' + this.opacity + ";-webkit-transform:rotate(" + this.rotate + 'deg);"></div>'); {
+    this.top = a.top, this.left = a.left, this.width = a.w, "null" == this.width && (this.width = 640), this.height = a.h, this.shapecolor = a.shapecolor, this.opacity = a.opacity ? a.opacity : 1, this.eletype = "pshape", this.show = a.show ? a.show : "fadeIn", this.speed = a.speed ? a.speed : 1, this.delay = a.delay ? a.delay : 1, this.tl = a.tl ? a.tl : 0, this.picid = a.picid ? a.picid : 0, this.shape = a.shape ? a.shape : 0, this.borderradius = a.borderradius ? a.borderradius : 0, this.boxshadow = a.boxshadow ? a.boxshadow : -1, this.elementout = $('<div class="elementout" style="z-index:0;height:0;width:0px;position:relative;opacity:' + this.opacity + ";-webkit-transform:rotate(" + this.rotate + 'deg);"></div>'); {
         var b = this.width > this.height ? this.width : this.height;
         this.borderradius / 100 * b
     }
@@ -661,7 +675,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     var c = parseInt(this.height) / 2 + parseInt(this.top);
     this.elementout.css({
         "transform-origin": parseInt(this.left) + parseInt(this.width / 2) + "px " + c + "px"
-    }), console.log("ot" + c), this.timeout, this.sc = .7, this.update(), this.viewmodeinit(a)
+    }), this.timeout, this.sc = .7, this.update(), this.viewmodeinit(a)
 }, pshape.prototype.loadpic = function() {}, pshape.prototype.viewmodeinit = function() {}, pshape.prototype.update = function() {
     this.elementout.css({
         opacity: this.opacity
@@ -700,7 +714,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     });
     var a = this,
         b = parseInt(a.delay);
-    console.log("delay" + b), this.timeout = setTimeout(function() {
+     this.timeout = setTimeout(function() {
         a.elementout.css({
             opacity: a.opacity
         }), a.element.show(), a.element.addClass(a.show)
@@ -724,11 +738,11 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
 }, pshape.prototype.clean = function() {
     this.element.removeClass(this.show), "noeffect" == this.show && this.show || this.elementout.css({
         opacity: 0
-    }), console.log("clean" + this.show), this.timeout && clearTimeout(this.timeout), delete_call = null, upkey_call = null, downkey_call = null, leftkey_call = null, rightkey_call = null, console.log("clean")
+    }), this.timeout && clearTimeout(this.timeout), delete_call = null, upkey_call = null, downkey_call = null, leftkey_call = null, rightkey_call = null
 }, pshape.prototype.unsethammer = function() {
     this.mc && this.mc.destroy()
 }, pshape.prototype.focusedit = function() {}, pshape.prototype.onfocus = function() {}, pshape.prototype.sethammer = function() {}, ptext.prototype.generate = function() {
-    console.log("url", this.eletype);
+    ;
     var a = {
         top: this.top,
         left: this.left,
@@ -750,7 +764,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     };
     return a.con = this.contentarea.html(), a.lineheight = this.lineheight, a.textalign = this.textalign, a.textvalign = this.textvalign, a.prepara = this.prepara, a.afterpara = this.afterpara, a.ftcolor = this.fontcolor, a.ftsize = this.fontsize, a.tl = this.tl, a.fontbold = this.fontbold, a.fontitalic = this.fontitalic, a.udl = this.udl, a
 }, ptext.prototype.init = function(a) {
-    this.top = a.top, this.left = a.left, this.width = a.w, "null" == this.width && (this.width = 640), this.height = a.h, this.bgcolor = a.bgcolor, this.opacity = a.opacity, this.eletype = a.type, this.con = a.con, this.show = a.show, this.speed = a.speed, this.delay = a.delay, this.tl = a.tl ? a.tl : 0, this.picid = a.picid ? a.picid : 0, console.log("init" + this.picid), this.borderradius = a.borderradius ? a.borderradius : 0, this.boxshadow = a.boxshadow ? a.boxshadow : -1, this.elementout = $('<div class="elementout ptext" style="z-index:0;height:0;width:0px;position:relative;opacity:' + this.opacity + ";-webkit-transform:rotate(" + this.rotate + 'deg);"></div>');
+    this.top = a.top, this.left = a.left, this.width = a.w, "null" == this.width && (this.width = 640), this.height = a.h, this.bgcolor = a.bgcolor, this.opacity = a.opacity, this.eletype = a.type, this.con = a.con, this.show = a.show, this.speed = a.speed, this.delay = a.delay, this.tl = a.tl ? a.tl : 0, this.picid = a.picid ? a.picid : 0, this.borderradius = a.borderradius ? a.borderradius : 0, this.boxshadow = a.boxshadow ? a.boxshadow : -1, this.elementout = $('<div class="elementout ptext" style="z-index:0;height:0;width:0px;position:relative;opacity:' + this.opacity + ";-webkit-transform:rotate(" + this.rotate + 'deg);"></div>');
     var b = this.width > this.height ? this.width : this.height,
         c = this.borderradius / 100 * b;
     this.element = $('<div class="element" style="z-index:0;border-radius:' + c + "px;top:" + this.top + "px;left:" + this.left + "px;width:" + this.width + "px;height:auto;background:" + this.bgcolor + '" ></div>'), this.borderstyle = a["border-style"] ? a["border-style"] : "none", this.bordercolor = a["border-color"] ? a["border-color"] : "black", this.borderwidth = a["border-width"] ? a["border-width"] : "0px", this.element.css({
@@ -775,14 +789,14 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     var d = parseInt(this.height) / 2 + parseInt(this.top);
     if (this.elementout.css({
         "transform-origin": parseInt(this.left) + parseInt(this.width / 2) + "px " + d + "px"
-    }), console.log("ot" + d), this.timeout, this.sc = .7, this.update(), 1 == editor_editingmode) {
+    }), this.timeout, this.sc = .7, this.update(), 1 == editor_editingmode) {
         this.resizer = new makaresizer(this);
         "pic" == this.eletype || "ptext" == this.eletype || "btn" == this.eletype
     }
     this.viewmodeinit(a)
 }, ptext.prototype.loadpic = function() {}, ptext.prototype.viewmodeinit = function(a) {
     if (1 != editor_editingmode && "btn" == this.eletype) {
-        this.url = a.url ? a.url : "www.maka.im";
+        this.url = a.url ? a.url : HOME_URL;
         var b = this;
         b.get().css({
             "z-index": 999
@@ -854,7 +868,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     });
     var a = this,
         b = parseInt(a.delay);
-    console.log("delay" + b), this.timeout = setTimeout(function() {
+    this.timeout = setTimeout(function() {
         a.elementout.css({
             opacity: a.opacity
         }), a.element.show(), a.element.addClass(a.show)
@@ -862,7 +876,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
 }, ptext.prototype.resettodefault = function() {}, ptext.prototype.clean = function() {
     this.element.removeClass(this.show), "noeffect" == this.show && this.show || this.elementout.css({
         opacity: 0
-    }), console.log("clean" + this.show), this.timeout && clearTimeout(this.timeout), delete_call = null, upkey_call = null, downkey_call = null, leftkey_call = null, rightkey_call = null, console.log("clean")
+    }), this.timeout && clearTimeout(this.timeout), delete_call = null, upkey_call = null, downkey_call = null, leftkey_call = null, rightkey_call = null
 }, ptext.prototype.unsethammer = function() {
     this.mc && this.mc.destroy()
 }, ptext.prototype.focusedit = function() {
@@ -880,7 +894,12 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
         cursor: "text"
     }), this.contentarea.on("keyup", function() {
         a.resizer.updatecontroylayer(), a.con = a.contentarea.html(), a.isediting = !1
-    }), this.contentarea.on("mousedown", function() {}), startY = parseInt(b.css("top")), startX = parseInt(b.css("left")), startYinner = parseInt(b.find("img").css("top")), startXinner = parseInt(b.find("img").css("left")), editing_lock = 1, a.isme = !0, c.clearresizer(), a.resizer.enableresize(), editor_makatoolbar.settoolbar(a, a.eletype), a.isme = !1, $(".onedit").removeClass("onedit"), b.addClass("onedit"), system_call = !0, a.page.ismove = !1;
+    }), this.contentarea.on("mousedown", function() {}), 
+    startY = parseInt(b.css("top")), startX = parseInt(b.css("left")), startYinner = parseInt(b.find("img").css("top")), 
+    startXinner = parseInt(b.find("img").css("left")), 
+    editing_lock = 1, a.isme = !0, c.clearresizer(), a.resizer.enableresize(), 
+    editor_makatoolbar.settoolbar(a, a.eletype), a.isme = !1, 
+    $(".onedit").removeClass("onedit"), b.addClass("onedit"), system_call = !0, a.page.ismove = !1;
     b.attr("type");
     $(".pagecontent").css({
         overflow: "visible"
@@ -910,7 +929,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
         system_call = !1, a.istyping = !1
     }).on("doubletap", function() {})
 }, ppictrue.prototype.generate = function() {}, ppictrue.prototype.init = function(a) {
-    this.top = a.top, this.left = a.left, this.width = a.w, "null" == this.width && (this.width = 640), this.height = a.h, this.inw = a.inw, "null" != this.inw && this.inw || (this.inw = "auto"), this.inh = "auto", this.lockratio = !0, this.shapecolor = a.shapecolor, this.opacity = a.opacity ? a.opacity : 1, this.eletype = "ppictrue", this.show = a.show ? a.show : "fadeIn", this.speed = a.speed ? a.speed : 1, this.delay = a.delay ? a.delay : 1, this.tl = a.tl ? a.tl : 0, this.rotate = a.rotate ? a.rotate : 0, this.picid = a.picid ? a.picid : 0, console.log("piicd" + this.picid), this.picid < 1e4 && (this.con = "http://7sbsoj.com2.z0.glb.qiniucdn.com/maka/app/gfile/public/pic%3Fget=id/" + this.picid + "/thumb/29"), this.con = "http://img.maka.mobi/maka/app/gfile/public/index.php/picture/get?get=id/" + this.picid + "/thumb/100", this.shape = a.shape ? a.shape : 0, console.log("init" + this.picid), this.stylecolor = a.stylecolor ? a.stylecolor : "rgba(0,0,0,0)", this.styleopacity = a.styleopacity ? a.styleopacity : 0, this.intop = parseInt(a.intop), this.inleft = parseInt(a.inleft), a.inTop && (this.intop = a.inTop), a.inLeft && (this.inleft = a.inLeft), this.borderradius = a.borderradius ? a.borderradius : 0, this.boxshadow = a.boxshadow ? a.boxshadow : -1, this.elementout = $('<div class="elementout ppic" style="z-index:0;height:0;width:0px;position:relative;opacity:' + this.opacity + ";-webkit-transform:rotate(" + this.rotate + 'deg);"></div>'); {
+    this.top = a.top, this.left = a.left, this.width = a.w, "null" == this.width && (this.width = 640), this.height = a.h, this.inw = a.inw, "null" != this.inw && this.inw || (this.inw = "auto"), this.inh = "auto", this.lockratio = !0, this.shapecolor = a.shapecolor, this.opacity = a.opacity ? a.opacity : 1, this.eletype = "ppictrue", this.show = a.show ? a.show : "fadeIn", this.speed = a.speed ? a.speed : 1, this.delay = a.delay ? a.delay : 1, this.tl = a.tl ? a.tl : 0, this.rotate = a.rotate ? a.rotate : 0, this.picid = a.picid ? a.picid : 0, this.picid < 1e4 && (this.con = "http://7sbsoj.com2.z0.glb.qiniucdn.com/maka/app/gfile/public/pic%3Fget=id/" + this.picid + "/thumb/29"), this.con = "http://img.maka.mobi/maka/app/gfile/public/index.php/picture/get?get=id/" + this.picid + "/thumb/100", this.shape = a.shape ? a.shape : 0, this.stylecolor = a.stylecolor ? a.stylecolor : "rgba(0,0,0,0)", this.styleopacity = a.styleopacity ? a.styleopacity : 0, this.intop = parseInt(a.intop), this.inleft = parseInt(a.inleft), a.inTop && (this.intop = a.inTop), a.inLeft && (this.inleft = a.inLeft), this.borderradius = a.borderradius ? a.borderradius : 0, this.boxshadow = a.boxshadow ? a.boxshadow : -1, this.elementout = $('<div class="elementout ppic" style="z-index:0;height:0;width:0px;position:relative;opacity:' + this.opacity + ";-webkit-transform:rotate(" + this.rotate + 'deg);"></div>'); {
         var b = this.width > this.height ? this.width : this.height;
         this.borderradius / 100 * b
     }
@@ -918,7 +937,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     var c = parseInt(this.height) / 2 + parseInt(this.top);
     this.elementout.css({
         "transform-origin": parseInt(this.left) + parseInt(this.width / 2) + "px " + c + "px"
-    }), console.log("ot" + c), this.timeout, this.sc = .7, this.update(), this.viewmodeinit(a), this.contentarea.eraser()
+    }), this.timeout, this.sc = .7, this.update(), this.viewmodeinit(a), this.contentarea.eraser()
 }, ppictrue.prototype.loadpic = function(a) {
     this.con && viewer_preloader.addpic(this.contentarea, this.con, a)
 }, ppictrue.prototype.viewmodeinit = function() {}, ppictrue.prototype.update = function() {
@@ -970,7 +989,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     });
     var a = this,
         b = parseInt(a.delay);
-    console.log("delay" + b), this.timeout = setTimeout(function() {
+    this.timeout = setTimeout(function() {
         a.elementout.css({
             opacity: a.opacity
         }), a.element.show(), a.element.addClass(a.show)
@@ -994,7 +1013,8 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
 }, ppictrue.prototype.clean = function() {
     this.element.removeClass(this.show), "noeffect" == this.show && this.show || this.elementout.css({
         opacity: 0
-    }), console.log("clean" + this.show), clearTimeout(this.timeout), delete_call = null, upkey_call = null, downkey_call = null, leftkey_call = null, rightkey_call = null, console.log("clean")
+    }), clearTimeout(this.timeout), 
+    delete_call = null, upkey_call = null, downkey_call = null, leftkey_call = null, rightkey_call = null
 }, ppictrue.prototype.unsethammer = function() {
     this.mc && this.mc.destroy()
 }, ppictrue.prototype.focusedit = function() {
@@ -1048,7 +1068,6 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
         system_call = !1, a.istyping = !1
     })
 }, eleform.prototype.generate = function() {
-    console.log("url", this.eletype);
     var a = {
         top: this.top,
         left: this.left,
@@ -1058,7 +1077,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     return a.qlist = this.qlist, a.formcolor = this.formcolor, a.type = "eleform", a.formid = this.formid, a
 }, eleform.prototype.init = function(a) {
     var b = this;
-    this.top = a.top, this.left = a.left, this.qlist = a.qlist ? a.qlist : "0", this.formcolor = a.formcolor, this.sucmsg = a.sucmsg, this.opacity = 1, this.formid = a.formid ? a.formid : randomString(10), this.width = 500, this.height = 600, this.eletype = a.type, console.log("initform"), this.elementout = $('<div class="elementout" style="z-index:0;height:0;width:0px;position:relative;"></div>');
+    this.top = a.top, this.left = a.left, this.qlist = a.qlist ? a.qlist : "0", this.formcolor = a.formcolor, this.sucmsg = a.sucmsg, this.opacity = 1, this.formid = a.formid ? a.formid : randomString(10), this.width = 500, this.height = 600, this.eletype = a.type,  this.elementout = $('<div class="elementout" style="z-index:0;height:0;width:0px;position:relative;"></div>');
     var c = this;
     this.element = $('<div class="element eleform" style="z-index:0;top:' + this.top + "px;left:" + this.left + "px;width:" + this.width + 'px;" ></div>'), c.warnarea = $('<div style="z-index:999;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(42,50,65,1)"></div>');
     var d = this.warnarea,
@@ -1121,7 +1140,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     });
     var a = this,
         b = parseInt(a.delay);
-    console.log("delay" + b), this.timeout = setTimeout(function() {
+    this.timeout = setTimeout(function() {
         a.elementout.css({
             opacity: a.opacity
         }), a.element.show(), a.element.addClass(a.show)
@@ -1145,7 +1164,7 @@ $(window).resize(function() {}), pshape.prototype.generate = function() {
     for (var b in a.inputarray) a.inputarray[b].val("");
     this.warnarea.empty(), this.warnarea.remove(), this.element.removeClass(this.show), "noeffect" == this.show && this.show || this.elementout.css({
         opacity: 0
-    }), console.log("clean" + this.show), clearTimeout(this.timeout), console.log("clean")
+    }), clearTimeout(this.timeout)
 }, eleform.prototype.unsethammer = function() {}, eleform.prototype.focusedit = function() {}, eleform.prototype.onfocus = function() {}, eleform.prototype.sethammer = function() {}, makaswiper.prototype.generate = function() {
     var a = {
         top: this.top,
@@ -1196,7 +1215,7 @@ makaswiper.prototype.init = function(a) {
     this.element.append(this.wrapper), this.element.append(i);
     var j = this.element;
     if (0 == this.swc) {
-        console.log("swc" + this.swc); {
+        {
             new Swiper(j, {
                 speed: 400,
                 spaceBetween: a.width - a.width,
@@ -1212,22 +1231,22 @@ makaswiper.prototype.init = function(a) {
     }
     this.elementout.append(this.element)
 }, makaswiper.prototype.loadpic = function() {
-    if (console.log("ele load type" + this.eletype), "pic" == this.eletype && !this.loaded) {
-        console.log("ele load start"), preload_loadingprequeue++;
+    if ("pic" == this.eletype && !this.loaded) {
+        preload_loadingprequeue++;
         var a = new Image;
-        console.log("loadpic" + this.lazy), a.src = this.lazy, this.con = this.lazy;
+        a.src = this.lazy, this.con = this.lazy;
         var b = this;
         if (a.complete) {
             if (b.loaded) return;
             b.contentarea.attr({
                 src: b.con
-            }), loadingonepic(), clearTimeout(b.lazytimer), b.loaded = !0, console.log("ele load end")
+            }), loadingonepic(), clearTimeout(b.lazytimer), b.loaded = !0
         } else a.onload = function() {
             b.loaded || (loadingonepic(), clearTimeout(b.lazytimer), b.contentarea.attr({
                 src: b.con
-            }), b.loaded = !0, console.log("ele load end"))
+            }), b.loaded = !0)
         }, a.onerror = function() {
-            loadingonepic(), clearTimeout(b.lazytimer), console.log("ele load error")
+            loadingonepic(), clearTimeout(b.lazytimer)
         };
         this.lazytimer = setTimeout(function() {
             b.loaded = !0, loadingonepic(), b.contentarea.attr({
@@ -1237,7 +1256,7 @@ makaswiper.prototype.init = function(a) {
     }
 }, makaswiper.prototype.viewmodeinit = function(a) {
     if (1 != editor_editingmode && "btn" == this.eletype) {
-        this.url = a.url ? a.url : "www.maka.im";
+        this.url = a.url ? a.url : HOME_URL;
         var b = this;
         b.get().css({
             "z-index": 999
@@ -1278,7 +1297,7 @@ makaswiper.prototype.init = function(a) {
 }, makaswiper.prototype.clean = function() {
     this.element.removeClass(this.show), "noeffect" != this.show && this.elementout.css({
         opacity: 0
-    }), clearTimeout(this.timeout), this.iscrop = !1, delete_call = null, upkey_call = null, downkey_call = null, leftkey_call = null, rightkey_call = null, console.log("clean")
+    }), clearTimeout(this.timeout), this.iscrop = !1, delete_call = null, upkey_call = null, downkey_call = null, leftkey_call = null, rightkey_call = null
 }, makaswiper.prototype.showeffect = function() {
     "noeffect" == this.show && this.element.show(), this.element.css({
         "animation-duration": this.speed / 1e3 + "s"
@@ -1287,7 +1306,7 @@ makaswiper.prototype.init = function(a) {
     });
     var a = this,
         b = parseInt(a.delay) + 100 * Math.random();
-    console.log("delay" + b), this.timeout = setTimeout(function() {
+    this.timeout = setTimeout(function() {
         a.elementout.css({
             opacity: a.opacity
         }), a.element.show(), a.element.addClass(a.show)
@@ -1306,7 +1325,7 @@ makaswiper.prototype.init = function(a) {
     }, 10)
 }, elechart.prototype.init = function(a) {
     var b = this;
-    console.log(a), this.top = a.top, this.left = a.left, this.width = a.width, this.height = a.height, b.content = a.content, b.chartdata = b.content.data, this.max = b.content.options.yAxis.max, this.min = b.content.options.yAxis.min, this.background = "rgba(0,0,0,0)", this.tcolor = a.content.options.lineColor ? a.content.options.lineColor : "gray", console.log(a.content);
+    this.top = a.top, this.left = a.left, this.width = a.width, this.height = a.height, b.content = a.content, b.chartdata = b.content.data, this.max = b.content.options.yAxis.max, this.min = b.content.options.yAxis.min, this.background = "rgba(0,0,0,0)", this.tcolor = a.content.options.lineColor ? a.content.options.lineColor : "gray";
     var c = a.content.multiple;
     this.charttype = c, 1 == c ? (this.stack = "none", this.multi = !1) : 2 == c ? (this.stack = null, this.multi = !0) : 3 == c && (this.stack = "normal", this.multi = !0), this.temp;
     var d = b.content,
@@ -1434,7 +1453,7 @@ makaswiper.prototype.init = function(a) {
 }, elechart.prototype.unsethammer = function() {}, elechart.prototype.focusedit = function() {}, elechart.prototype.onfocus = function() {}, elechart.prototype.sethammer = function() {}, elechartpie.prototype.init = function(a) {
     var b = this,
         c = this;
-    console.log(a), this.top = a.top, this.left = a.left, this.width = a.width, this.height = a.height, b.content = a.content, this.background = "rgba(0,0,0,0)", this.tcolor = a.content.options.lineColor ? a.content.options.lineColor : "gray", this.hcolor = a.content.options.highlightColor ? a.content.options.highlightColor : "black", this.piedata = b.content.data;
+    this.top = a.top, this.left = a.left, this.width = a.width, this.height = a.height, b.content = a.content, this.background = "rgba(0,0,0,0)", this.tcolor = a.content.options.lineColor ? a.content.options.lineColor : "gray", this.hcolor = a.content.options.highlightColor ? a.content.options.highlightColor : "black", this.piedata = b.content.data;
     a.content;
     if (this.opacity = 1, this.elementout = $('<div class="elementout" style="background:' + this.background + ";position:absolute;z-index:0;top:" + this.top + "px;left:" + this.left + "px;width:" + this.width + "px;height:" + this.height + 'px"></div>'), this.pietitle = $('<div   style="text-align:center;position:absolute;z-index:0;top:0px;left:0px;width:' + this.width + 'px;"></div>'), this.swipewarn = $('<img style="z-index:99;position:absolute;width:180px;left:230px;top:50%;margin-top:-90px" src="plugin/swipewarn.png" />'), this.elementout.append(this.swipewarn), this.piedata.length > 1 ? (this.element = $('<div class="element"  style="z-index:0;top:50px;left:0px;width:' + this.width + "px;height:" + (this.height - 50) + 'px;"></div>'), this.elementout.append(this.pietitle)) : this.element = $('<div class="element"  style="z-index:0;top:0px;left:0px;width:' + this.width + "px;height:" + (this.height - 50) + 'px;"></div>'), this.elementout.append(this.element), this.piedata.length > 1) {
         for (var d in this.piedata) {

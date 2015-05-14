@@ -1,0 +1,224 @@
+#sugar {
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+}
+#sugar-wrap {
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+}
+#preloadarea {
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: white;
+}
+.wthum {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    left: 50%;
+    top: 30%;
+    margin: -30px;
+    display: none;
+    background: rgb(57, 187, 171);
+    overflow: hidden;
+}
+.waitthum {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 340px;
+    left: 50%;
+    top: 30%;
+    margin: -100px;
+    display: none;
+    background: rgba(57, 187, 171, 0.4);
+}
+#persent {
+    margin-top: 150px;
+    text-indent: 12px;
+    position: absolute;
+    top: 31%;
+    width: 100%;
+    left: 0;
+    color: rgb(180, 180, 180);
+    font-size: 24px;
+    text-align: center;
+}
+#covert {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 340px;
+    left: 50%;
+    top: 30%;
+    margin: -100px;
+    overflow: hidden;
+}
+#cover {
+    width: 100%;
+    height: 100%;
+    border-radius: 340px;
+}
+#supad {
+    font-family: Tahoma, Verdana, STHeiTi, simsun, sans-serif;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    font-size: 20px;
+    width: 640px;
+    margin-left: -320px;
+    line-height: 20px;
+    color: rgb(180, 180, 180);
+    display: block;
+}
+.page-container {
+    margin: -506px 0 0 -320px;
+    position: absolute;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    height: 1012px;
+    width: 640px;
+    left: 50%;
+    top: 50%;
+}
+.musicitem {
+    width: 100%;
+    height: 40px;
+    border-bottom: solid 3px rgba(210, 210, 210, 1);
+    font-size: 20px;
+    color: rgba(150, 150, 150, 1);
+    padding-left: 30px;
+    line-height: 40px;
+}
+.page-slide {
+    width: 318px;
+    height: 500px;
+}
+.page-wrapper {
+    position: relative;
+    width: 100%;
+    -webkit-transition-property: -webkit-transform, left, top;
+    -webkit-transition-duration: 0s;
+    -webkit-transition-timing-function: ease;
+    -moz-transition-duration: 0s;
+    -moz-transform: translate3d(0px, 0, 0);
+    -moz-transition-timing-function: ease;
+    -o-transition-duration: 0s;
+    -o-transition-timing-function: ease;
+    -o-transform: translate(0px, 0);
+    -ms-transition-property: -ms-transform, left, top;
+    -ms-transition-duration: 0s;
+    -ms-transform: translate3d(0px, 0, 0);
+    -ms-transition-timing-function: ease;
+    transition-property: transform, left, top;
+    transition-duration: 0s;
+    -webkit-transform: translate3d(0px, 0, 0);
+    transform: translate3d(0px, 0, 0);
+    transition-timing-function: ease;
+}
+body {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #000;
+    background: rgba(24, 24, 24, 1);
+    overflow: hidden;
+    font-family: Tahoma, Verdana, STHeiTi, simsun, sans-serif !important;
+}
+div, p {
+    font-family: Tahoma, Verdana, STHeiTi, simsun, sans-serif !important;
+}
+textarea {
+    font-family: Tahoma, Verdana, STHeiTi, simsun, sans-serif !important;
+    padding: 0;
+}
+.pagebg, .pagecontent {
+    margin: -506px 0 0 -320px;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    height: 1012px;
+    width: 640px;
+    left: 50%;
+    top: 50%;
+}
+.page {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: -1px;
+    left: -2px;
+    display: visible;
+    display: none;
+}
+.element[show] {
+    position: absolute;
+}
+.shapearea {
+    -webkit-mask-repeat: round;
+}
+img {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+.element {
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    border: 0 dashed rgba(20, 20, 20, .5);
+    margin: 0;
+    z-index: 0;
+    color: #000;
+}
+.noselect {
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.tjxm {
+    float: left;
+    width: 150px;
+    margin-top: 10px;
+    margin-left: 50px;
+    height: 250px;
+    overflow: hidden;
+}
+.tjthum {
+    width: 160px;
+    height: 160px;
+    border-radius: 2px;
+}
+.tjtitle {
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    font-size: 20px;
+    width: 150px;
+    height: 120px;
+    margin-top: 10px;
+    line-height: 30px;
+    color: gray;
+}
+#user_thum {
+    border-radius: 163px;
+}
